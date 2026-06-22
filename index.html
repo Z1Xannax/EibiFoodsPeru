@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ebi Foods · Hamburguesas de Langostinos — saludables, sin gluten y sin conservantes</title>
+  <meta name="description" content="Ebi Foods Perú. Hamburguesas de langostinos: altas en proteína, con Omega 3·6·9, libres de gluten y sin conservantes. El antojo que te hace bien. Cómpralas online o en Tottus." />
+  <meta name="theme-color" content="#142b1a" />
+
+  <!-- Favicon e íconos con el logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+
+  <!-- Open Graph (vista previa al compartir en WhatsApp / redes) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ebi Foods — Hamburguesas de Langostinos" />
+  <meta property="og:description" content="Saludable, sin gluten y sin conservantes. El antojo que te hace bien." />
+  <meta property="og:image" content="assets/producto-burger.jpg" />
+
+  <!-- Fuentes: Archivo (títulos display) + Manrope (cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES — Ebi Foods · langostino premium saludable
+       ========================================================= */
+    :root {
+      --verde: #1d3d26; --verde-osc: #142b1a; --verde-prof: #0e2113;
+      --dorado: #d8a72c; --dorado-claro: #ecc758;
+      --naranja: #e0823c;
+      --crema: #efe7c8; --crema-osc: #e2d3a4;
+      --crema-bg: #f5efdb; --crema-bg2: #ede3c2;
+      --texto: #4a4330;
+      --wsp: #25d366; --wsp-oscuro: #1ebe57;
+      --sombra: 0 26px 60px -28px rgba(0,0,0,.6);
+      --radio: 18px; --max: 1200px;
+      --nav-h: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', system-ui, sans-serif; color: var(--texto); background: var(--crema-bg); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 { font-family: 'Archivo', system-ui, sans-serif; line-height: 1.05; letter-spacing: -.5px; }
+    img { display: block; max-width: 100%; }
+    .contenedor { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* =========================================================
+       BOTONES (alto táctil mínimo 48px)
+       ========================================================= */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: .98rem; letter-spacing: .3px; min-height: 48px; padding: 14px 28px; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease; }
+    .btn-oro { background: var(--dorado); color: var(--verde-prof); box-shadow: 0 14px 30px -12px rgba(216,167,44,.9); }
+    .btn-oro:hover { background: var(--dorado-claro); transform: translateY(-3px); }
+    .btn-borde { background: transparent; color: var(--crema); border: 1.5px solid rgba(239,231,200,.55); }
+    .btn-borde:hover { background: var(--crema); color: var(--verde-prof); transform: translateY(-3px); }
+
+    /* =========================================================
+       LOGO (marca)
+       ========================================================= */
+    .logo { display: inline-flex; align-items: center; gap: 11px; }
+    .logo .logo-ico { width: 44px; height: 44px; object-fit: contain; flex: 0 0 auto; border-radius: 9px; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+    .logo .word { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.18rem; letter-spacing: .3px; color: var(--crema); line-height: 1; text-transform: uppercase; }
+    .logo .word b { color: var(--dorado); font-weight: 900; }
+
+    /* =========================================================
+       NAV FIJA (transparente sobre el hero, sólida al hacer scroll)
+       ========================================================= */
+    nav.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 70; transition: background .3s ease, box-shadow .3s ease, backdrop-filter .3s ease; }
+    .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; transition: padding .3s ease; }
+    nav.nav.solid { background: rgba(14,33,19,.92); backdrop-filter: blur(12px); box-shadow: 0 8px 30px -10px rgba(0,0,0,.6); }
+    nav.nav.solid .nav-inner { padding: 10px 22px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--crema); position: relative; }
+    .nav-links a.solo-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--dorado); transition: width .3s; }
+    .nav-links a.solo-link:hover { color: var(--dorado); }
+    .nav-links a.solo-link:hover::after { width: 100%; }
+    .nav-cta { background: var(--dorado); color: var(--verde-prof); padding: 11px 20px; border-radius: 999px; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; transition: transform .2s ease, background .2s ease; }
+    .nav-cta:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+
+    /* Botón hamburguesa (móvil) */
+    .hamburguesa { display: none; width: 46px; height: 46px; border-radius: 12px; border: 1px solid rgba(239,231,200,.4); background: rgba(0,0,0,.25); cursor: pointer; position: relative; }
+    .hamburguesa span { position: absolute; left: 12px; right: 12px; height: 2px; background: var(--crema); border-radius: 2px; transition: transform .3s ease, opacity .3s ease; }
+    .hamburguesa span:nth-child(1) { top: 16px; } .hamburguesa span:nth-child(2) { top: 22px; } .hamburguesa span:nth-child(3) { top: 28px; }
+    .hamburguesa.activo span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburguesa.activo span:nth-child(2) { opacity: 0; }
+    .hamburguesa.activo span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Panel de menú móvil */
+    .menu-movil { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 340px); z-index: 80; background: linear-gradient(180deg, #1f4128, #0e2113); box-shadow: -20px 0 60px rgba(0,0,0,.6); transform: translateX(100%); transition: transform .4s cubic-bezier(.2,.7,.2,1); display: flex; flex-direction: column; padding: calc(28px + env(safe-area-inset-top)) 26px 28px; gap: 6px; }
+    .menu-movil.abierto { transform: translateX(0); }
+    .menu-movil .cerrar { align-self: flex-end; background: none; border: none; color: var(--dorado-claro); font-size: 1.8rem; cursor: pointer; line-height: 1; margin-bottom: 18px; }
+    .menu-movil a { color: var(--crema); font-family: 'Archivo', sans-serif; font-size: 1.4rem; font-weight: 800; padding: 14px 0; border-bottom: 1px solid rgba(216,167,44,.16); text-transform: uppercase; letter-spacing: .3px; }
+    .menu-movil a:last-of-type { border-bottom: none; }
+    /* Botón comprar premium (menú lateral) */
+    .menu-comprar { display: flex; align-items: center; gap: 13px; margin-top: 24px; padding: 9px 20px 9px 9px; border-radius: 18px; color: var(--verde-prof); background: linear-gradient(135deg, #ecc758 0%, #d8a72c 60%, #c79420 100%); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 16px 40px -12px rgba(216,167,44,.6), inset 0 1px 0 rgba(255,255,255,.4); transition: transform .25s ease; text-transform: none !important; }
+    .menu-comprar:hover { transform: translateY(-2px); }
+    .menu-comprar .ic { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background: rgba(14,33,19,.16); display: grid; place-items: center; }
+    .menu-comprar .ic svg { width: 24px; height: 24px; fill: var(--verde-prof); }
+    .menu-comprar .txt { display: flex; flex-direction: column; line-height: 1.12; }
+    .menu-comprar .txt small { font-size: .72rem; font-weight: 600; opacity: .8; font-family: 'Manrope', sans-serif; }
+    .menu-comprar .txt b { font-size: 1.04rem; font-weight: 800; font-family: 'Manrope', sans-serif; }
+    .overlay { position: fixed; inset: 0; z-index: 75; background: rgba(0,0,0,.5); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s ease; }
+    .overlay.activo { opacity: 1; visibility: visible; }
+
+    /* =========================================================
+       HERO con profundidad 3D y paralaje
+       ========================================================= */
+    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; color: var(--crema); overflow: hidden; perspective: 1200px; padding-top: var(--nav-h);
+      background:
+        radial-gradient(70% 50% at 50% -6%, rgba(216,167,44,.22), transparent 58%),
+        radial-gradient(80% 65% at 88% 110%, rgba(224,130,60,.22), transparent 55%),
+        radial-gradient(75% 60% at 8% 112%, rgba(14,33,19,.6), transparent 55%),
+        linear-gradient(165deg, #265233 0%, #1a3a23 48%, #112a18 100%); }
+    /* Emblema fantasma del logo detrás del contenido */
+    .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: url("assets/logo.png") no-repeat center 28%; background-size: min(560px, 86vw); opacity: .06; border-radius: 40px; mix-blend-mode: screen; }
+    /* Grano vintage */
+    .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"); opacity: .25; mix-blend-mode: soft-light; }
+    .deco { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform; }
+    .deco-1 { width: 420px; height: 420px; top: -120px; right: -80px; background: radial-gradient(circle at 35% 35%, rgba(216,167,44,.35), transparent 65%); filter: blur(6px); }
+    .deco-2 { width: 320px; height: 320px; bottom: -100px; left: -90px; background: radial-gradient(circle at 40% 40%, rgba(224,130,60,.32), transparent 65%); filter: blur(10px); }
+
+    .hero-grid { position: relative; z-index: 4; flex: 1; display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; padding: 24px 0 64px; text-align: center; }
+    .hero-sello { display: inline-flex; align-items: center; gap: 14px; align-self: center; font-size: .76rem; letter-spacing: 4px; text-transform: uppercase; color: var(--dorado); font-weight: 700; margin-bottom: 18px; }
+    .hero-sello::before, .hero-sello::after { content: ""; width: 32px; height: 1px; background: var(--dorado); opacity: .6; }
+    .hero h1 { font-size: clamp(2.7rem, 11vw, 5.6rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; color: var(--crema); text-transform: uppercase; text-shadow: 0 8px 36px rgba(0,0,0,.5); }
+    .hero h1 em { font-style: normal; color: var(--dorado-claro); }
+    .hero .frase { font-size: clamp(1rem, 2.4vw, 1.25rem); font-weight: 300; letter-spacing: .4px; opacity: .92; margin-bottom: 30px; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+
+    /* Logo grande del hero */
+    .hero-crest { width: clamp(160px, 44vw, 250px); margin: 0 auto; }
+    .hero-crest img { width: 100%; border-radius: 28px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); animation: flotaCrest 6s ease-in-out infinite; }
+    @keyframes flotaCrest { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-14px) rotate(1.5deg); } }
+
+    .hero-stats { position: relative; z-index: 4; display: flex; justify-content: center; gap: clamp(20px, 7vw, 64px); flex-wrap: wrap; padding: 0 0 30px; }
+    .stat { text-align: center; } .stat b { display: block; font-family: 'Archivo', sans-serif; font-size: clamp(1.6rem, 5vw, 2.6rem); font-weight: 900; color: var(--dorado-claro); }
+    .stat span { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; opacity: .8; }
+
+    /* =========================================================
+       SECCIONES
+       ========================================================= */
+    section { padding: 100px 0; }
+    .eyebrow { display: inline-block; color: var(--naranja); font-weight: 800; font-size: .78rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+    .titulo-seccion { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; color: var(--verde); margin-bottom: 16px; text-transform: uppercase; }
+    .titulo-seccion em { font-style: normal; color: var(--dorado); }
+    .lead { color: var(--texto); max-width: 600px; font-size: 1.04rem; }
+    .centro { text-align: center; margin: 0 auto 60px; } .centro .lead { margin: 0 auto; }
+    .ornamento { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto 16px; color: var(--dorado); }
+    .ornamento::before, .ornamento::after { content: ""; width: 50px; height: 1px; background: var(--dorado); }
+
+    /* PROPUESTA (historia) */
+    .historia { background: radial-gradient(75% 60% at 50% 0%, rgba(216,167,44,.14), transparent 60%), var(--crema-bg2); }
+    .grid-historia { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+    .historia-texto .titulo-seccion { margin-bottom: 20px; }
+    .historia-texto p { margin-bottom: 18px; font-size: 1.04rem; }
+    .firma { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--naranja); margin-top: 10px; text-transform: uppercase; letter-spacing: .3px; }
+    .historia-foto { position: relative; min-height: 420px; border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra); }
+    .historia-foto img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .historia-foto::after { content: ""; position: absolute; inset: 14px; border: 1.5px solid rgba(239,231,200,.55); border-radius: 10px; z-index: 2; pointer-events: none; }
+    .historia-foto .placa { position: absolute; z-index: 3; left: 22px; bottom: 22px; color: var(--crema); text-shadow: 0 2px 14px rgba(0,0,0,.7); }
+    .historia-foto .placa .grande { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 2.6rem; line-height: 1; }
+    .historia-foto .placa .chico { letter-spacing: 2px; text-transform: uppercase; font-size: .72rem; margin-top: 6px; opacity: .92; }
+
+    /* PRODUCTOS con tilt 3D */
+    .platos { background:
+        radial-gradient(70% 50% at 50% -5%, rgba(216,167,44,.14), transparent 60%),
+        radial-gradient(80% 60% at 100% 112%, rgba(224,130,60,.16), transparent 55%),
+        linear-gradient(170deg, #1a3a23, #0e2113); color: var(--crema); position: relative; overflow: hidden; }
+    .platos::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: url("assets/logo.png") no-repeat center 44px; background-size: min(420px, 72vw); opacity: .05; border-radius: 40px; }
+    .platos .titulo-seccion { color: var(--crema); } .platos .titulo-seccion em { color: var(--dorado); }
+    .platos .lead { color: rgba(239,231,200,.72); } .platos .eyebrow { color: var(--dorado); }
+    .platos .centro, .platos .grid-platos, .platos .pie-platos { position: relative; z-index: 2; }
+    .grid-platos { display: grid; grid-template-columns: 1fr; gap: 22px; }
+    .card-plato { perspective: 900px; }
+    .tarjeta-3d { position: relative; border-radius: var(--radio); overflow: hidden; background: linear-gradient(180deg, #24472d, #16301d); border: 1px solid rgba(216,167,44,.28); box-shadow: var(--sombra); transform-style: preserve-3d; transition: transform .2s ease, box-shadow .3s ease; will-change: transform; height: 100%; display: flex; flex-direction: column; }
+    .tarjeta-3d:hover { box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(216,167,44,.5); }
+    .tarjeta-3d .glare { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(circle at var(--mx,50%) var(--my,30%), rgba(255,255,255,.18), transparent 45%); }
+    .tarjeta-3d:hover .glare { opacity: 1; }
+    .escena { position: relative; height: 230px; overflow: hidden; transform: translateZ(40px); background: radial-gradient(110% 80% at 50% 110%, rgba(0,0,0,.4), transparent 60%), linear-gradient(160deg, #3a2a12 0%, #7a5318 45%, #c08a2a 100%); display: grid; place-items: center; }
+    .escena.t-caprese { background: radial-gradient(110% 80% at 50% 110%, rgba(0,0,0,.4), transparent 60%), linear-gradient(160deg, #2d5a2a, #8aab3a); }
+    .escena .card-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; transition: transform 8s ease; }
+    .tarjeta-3d:hover .card-foto { transform: scale(1.08); }
+    /* Video del plato: cuando exista el .mp4 cubre la escena; si no, se ve el poster/gradiente */
+    .escena .card-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; }
+    .escena::before { content: ""; position: absolute; inset: 0; z-index: 6; background: radial-gradient(circle at 50% 42%, rgba(255,210,140,.4), transparent 55%); animation: brilla 5s ease-in-out infinite; mix-blend-mode: screen; pointer-events: none; }
+    .escena::after { content: ""; position: absolute; top: -50%; left: -60%; width: 80%; height: 200%; z-index: 7; transform: rotate(20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); animation: barrido 6s ease-in-out infinite; pointer-events: none; }
+    @keyframes brilla { 0%,100% { opacity: .4; transform: scale(1); } 50% { opacity: .8; transform: scale(1.08); } }
+    @keyframes barrido { 0% { left: -60%; } 60%,100% { left: 130%; } }
+    .escena .emoji { position: relative; z-index: 3; font-size: 5rem; filter: drop-shadow(0 14px 18px rgba(0,0,0,.5)); animation: flotaEmoji 4.6s ease-in-out infinite; transform: translateZ(30px); }
+    @keyframes flotaEmoji { 0%,100% { transform: translateZ(30px) translateY(0) rotate(-2deg); } 50% { transform: translateZ(30px) translateY(-9px) rotate(2deg); } }
+    .cuerpo { padding: 24px; transform: translateZ(26px); display: flex; flex-direction: column; flex: 1; }
+    .cuerpo h3 { font-size: 1.4rem; font-weight: 800; color: var(--crema); margin-bottom: 8px; text-transform: uppercase; }
+    .cuerpo p { font-size: .94rem; color: rgba(239,231,200,.72); margin-bottom: 18px; flex: 1; }
+    .pie { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .precio-oro { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.4rem; color: var(--dorado-claro); }
+    .etiqueta-live { display: inline-flex; align-items: center; gap: 6px; font-size: .68rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--dorado-claro); background: rgba(216,167,44,.16); padding: 6px 12px; border-radius: 999px; }
+    .pie .mini-comprar { display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; background: var(--dorado); color: var(--verde-prof); padding: 9px 15px; border-radius: 999px; transition: background .2s, transform .2s; }
+    .pie .mini-comprar:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+    .pie-platos { text-align: center; margin-top: 50px; }
+
+    /* BENEFICIOS (galería) */
+    .galeria { background: radial-gradient(75% 60% at 50% 100%, rgba(224,130,60,.10), transparent 60%), var(--crema-bg2); }
+    #comprar { background: radial-gradient(70% 55% at 50% 0%, rgba(216,167,44,.12), transparent 60%); }
+    .grid-beneficios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .beneficio { position: relative; border-radius: 16px; overflow: hidden; padding: 26px 22px; color: var(--crema); border: 1px solid rgba(216,167,44,.3); transition: transform .35s ease, box-shadow .35s ease; min-height: 158px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
+    .beneficio:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+    .beneficio .ic { font-size: 2rem; line-height: 1; }
+    .beneficio b { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.15rem; text-transform: uppercase; letter-spacing: .3px; }
+    .beneficio span { font-size: .86rem; opacity: .82; line-height: 1.45; }
+    .b1 { background: linear-gradient(150deg, #1f4128, #2f6b3c); } .b2 { background: linear-gradient(150deg, #1a3a23, #3a7a2a); }
+    .b3 { background: linear-gradient(150deg, #7a5318, #c08a2a); color: var(--verde-prof); } .b3 span { opacity: .78; }
+    .b4 { background: linear-gradient(150deg, #143a2a, #1e7a5a); } .b5 { background: linear-gradient(150deg, #b3611a, #e0823c); }
+    .b6 { background: linear-gradient(150deg, #24472d, #4a8a3a); }
+
+    /* DÓNDE COMPRAR */
+    .grid-llegar { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: stretch; }
+    .datos-card { background: var(--crema-bg2); border-radius: var(--radio); padding: 32px; border: 1px solid rgba(216,167,44,.4); }
+    .datos-fila { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(216,167,44,.4); }
+    .datos-fila:last-of-type { border-bottom: none; }
+    .datos-fila .ic { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; background: var(--verde); display: grid; place-items: center; }
+    .datos-fila .ic svg { width: 22px; height: 22px; stroke: var(--crema); }
+    .datos-fila strong { display: block; color: var(--verde); font-family: 'Archivo', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: .3px; }
+    .datos-fila span { color: var(--texto); font-size: .95rem; }
+    /* Panel tienda (reemplaza el mapa) */
+    .tienda-panel { position: relative; border-radius: var(--radio); overflow: hidden; min-height: 360px; box-shadow: var(--sombra); border: 3px solid var(--dorado); display: flex; align-items: flex-end; color: var(--crema); }
+    .tienda-panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+    .tienda-panel::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, transparent 30%, rgba(8,20,12,.55) 70%, rgba(8,20,12,.92)); }
+    .tienda-panel .info-tienda { position: relative; z-index: 3; padding: 28px; width: 100%; }
+    .tienda-panel .info-tienda .precio { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--dorado-claro); }
+    .tienda-panel .info-tienda small { display: block; font-size: .8rem; letter-spacing: 1px; text-transform: uppercase; opacity: .85; margin-bottom: 12px; }
+
+    /* FOOTER */
+    footer { background: var(--verde-osc); color: rgba(239,231,200,.72); padding: 64px 0 30px; text-align: center; }
+    .footer-crest { width: 90px; margin: 0 auto 14px; border-radius: 18px; box-shadow: 0 12px 28px rgba(0,0,0,.5); }
+    footer .logo-texto { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.6rem; color: var(--crema); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+    footer .logo-texto .acento { color: var(--dorado); }
+    footer .frase-foot { font-family: 'Archivo', sans-serif; font-weight: 600; color: var(--dorado-claro); margin-bottom: 24px; text-transform: uppercase; letter-spacing: .5px; font-size: .95rem; }
+    .redes { display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; }
+    .redes a { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(216,167,44,.4); transition: all .25s ease; }
+    .redes a:hover { background: var(--dorado); border-color: var(--dorado); transform: translateY(-3px); }
+    .redes a:hover svg { fill: var(--verde-prof); } .redes svg { width: 20px; height: 20px; fill: var(--dorado-claro); transition: fill .25s; }
+    .footer-bottom { border-top: 1px solid rgba(216,167,44,.2); padding-top: 24px; margin-top: 10px; font-size: .82rem; opacity: .6; }
+
+    /* BOTÓN COMPRAR FLOTANTE */
+    .wsp-flotante { position: fixed; bottom: 22px; right: 22px; z-index: 65; display: inline-flex; align-items: center; gap: 10px; height: 60px; padding: 0 24px 0 20px; border-radius: 999px; background: linear-gradient(135deg, #ecc758, #d8a72c); color: var(--verde-prof); font-family: 'Archivo', sans-serif; font-weight: 800; font-size: .92rem; text-transform: uppercase; letter-spacing: .5px; box-shadow: 0 12px 30px -6px rgba(216,167,44,.7); animation: pulso 2.4s ease-in-out infinite; transition: transform .25s ease; }
+    .wsp-flotante:hover { transform: scale(1.06); } .wsp-flotante svg { width: 26px; height: 26px; fill: var(--verde-prof); }
+    @keyframes pulso { 0% { box-shadow: 0 12px 30px -6px rgba(216,167,44,.7), 0 0 0 0 rgba(216,167,44,.5); } 70% { box-shadow: 0 12px 30px -6px rgba(216,167,44,.7), 0 0 0 16px rgba(216,167,44,0); } 100% { box-shadow: 0 12px 30px -6px rgba(216,167,44,.7), 0 0 0 0 rgba(216,167,44,0); } }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px) rotateX(8deg); transform-origin: top; transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0) rotateX(0); }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (min-width: 720px) {
+      .grid-platos { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; }
+      .grid-beneficios { grid-template-columns: repeat(3, 1fr); }
+      .hero-grid { grid-template-columns: 1.05fr .95fr; text-align: left; padding: 24px 0 80px; }
+      .hero-sello { align-self: flex-start; }
+      .hero-crest { margin: 0; }
+    }
+    @media (min-width: 960px) {
+      .grid-historia { grid-template-columns: 1fr 1fr; }
+      .grid-llegar { grid-template-columns: 1fr 1.15fr; }
+    }
+    /* Ajustes móvil: menos padding, ocultar links desktop, mostrar hamburguesa */
+    @media (max-width: 719px) {
+      section { padding: 64px 0; }
+      .nav-links { display: none; }
+      .hamburguesa { display: block; }
+      .historia-foto { min-height: 340px; }
+      .footer-bottom { padding-bottom: 78px; } /* aire sobre el botón flotante */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ NAV FIJA ============================ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="logo" href="#hero" aria-label="Ebi Foods">
+        <img class="logo-ico" src="assets/logo.png" alt="" />
+        <span class="word">Ebi <b>Foods</b></span>
+      </a>
+      <div class="nav-links">
+        <a class="solo-link" href="#historia">Marca</a>
+        <a class="solo-link" href="#platos">Productos</a>
+        <a class="solo-link" href="menu.html">Catálogo</a>
+        <a class="solo-link" href="#comprar">Dónde comprar</a>
+        <a class="nav-cta" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar</a>
+      </div>
+      <button class="hamburguesa" id="hamburguesa" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menú móvil -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="menu-movil" id="menuMovil" aria-hidden="true">
+    <button class="cerrar" id="cerrarMenu" aria-label="Cerrar menú">×</button>
+    <a href="#historia">Marca</a>
+    <a href="#platos">Productos</a>
+    <a href="menu.html">Catálogo</a>
+    <a href="#comprar">Dónde comprar</a>
+    <a class="menu-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg></span>
+      <span class="txt"><small>Tienda online · envío a casa</small><b>Comprar ahora</b></span>
+    </a>
+  </aside>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero" id="hero">
+    <div class="deco deco-1" data-paralaje="0.04"></div>
+    <div class="deco deco-2" data-paralaje="0.07"></div>
+
+    <div class="contenedor" style="display:flex;flex-direction:column;flex:1;">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-sello">Ebi Foods · エビ · Hecha con langostino</span>
+          <h1>Hamburguesas de <em>Langostinos</em></h1>
+          <p class="frase">El antojo que te hace bien · saludable, sin gluten y sin conservantes.</p>
+          <div class="hero-cta">
+            <a class="btn btn-oro" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar ahora</a>
+            <a class="btn btn-borde" href="#platos">Ver productos</a>
+          </div>
+        </div>
+        <!-- Logo / emblema flotando -->
+        <div class="hero-crest" id="heroCrest" aria-hidden="true">
+          <img src="assets/logo.png" alt="Ebi Foods" />
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><b>18.3g</b><span>Proteína / unidad</span></div>
+        <div class="stat"><b>3·6·9</b><span>Omega</span></div>
+        <div class="stat"><b>0</b><span>Conservantes</span></div>
+        <div class="stat"><b>100%</b><span>Gluten free</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ PROPUESTA / MARCA ============================ -->
+  <section class="historia" id="historia">
+    <div class="contenedor">
+      <div class="grid-historia">
+        <div class="historia-texto reveal">
+          <span class="eyebrow">Nuestra propuesta</span>
+          <h2 class="titulo-seccion">El antojo que <em>te hace bien</em></h2>
+          <p>En Ebi Foods reinventamos la hamburguesa: la hacemos con <strong>langostino real</strong>, ese sabor del mar que se disfruta en cada bocado, pero sin la culpa de siempre. Premium por fuera, saludable por dentro.</p>
+          <p>Alta en proteína (18.3g por unidad) y baja en grasas, con <strong>Omega 3, 6 y 9</strong>, <strong>libre de gluten</strong> y <strong>sin conservantes</strong>. El antojo que tu cuerpo agradece. Irresistible. Saludable. Sabrosa.</p>
+          <p class="firma">— Ebi Foods Perú</p>
+        </div>
+        <div class="historia-foto reveal d2">
+          <img src="assets/producto-burger.jpg" alt="Hamburguesa de langostinos Ebi Foods a la parrilla" loading="lazy" />
+          <div class="placa"><div class="grande">Langostino</div><div class="chico">Sabor premium · hecho saludable</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRODUCTOS ============================ -->
+  <section class="platos" id="platos">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>🦐</span></div>
+        <span class="eyebrow">Lo nuestro</span>
+        <h2 class="titulo-seccion">Productos <em>destacados</em></h2>
+        <p class="lead">Una hamburguesa, mil formas de disfrutarla. Saludable, rápida y deliciosa.</p>
+      </div>
+
+      <div class="grid-platos">
+        <article class="card-plato reveal d1">
+          <div class="tarjeta-3d" data-tilt><span class="glare"></span>
+            <div class="escena"><video class="card-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="metadata"><source src="videos/hamburguesa.mp4" type="video/mp4" /></video></div>
+            <div class="cuerpo"><h3>Hamburguesa de Langostinos</h3><p>Caja de 4 unidades (480g). Alta en proteína, sin gluten y sin conservantes. Lista en minutos.</p><div class="pie"><span class="precio-oro">S/ 28</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
+          </div>
+        </article>
+        <article class="card-plato reveal d2">
+          <div class="tarjeta-3d" data-tilt><span class="glare"></span>
+            <div class="escena"><video class="card-video" poster="assets/producto-alino.jpg" autoplay muted loop playsinline preload="metadata"><source src="videos/alino.mp4" type="video/mp4" /></video></div>
+            <div class="cuerpo"><h3>Aliño Proteico</h3><p>Medallones dorados con salsa de la casa y ensalada de betarraga y granada. Liviano y completo.</p><div class="pie"><span class="etiqueta-live">Idea fácil</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="pie-platos reveal"><a class="btn btn-oro" href="menu.html">Ver el catálogo completo →</a></div>
+    </div>
+  </section>
+
+  <!-- ============================ BENEFICIOS ============================ -->
+  <section class="galeria">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>✦</span></div>
+        <span class="eyebrow">Por qué Ebi</span>
+        <h2 class="titulo-seccion">Sabor premium, <em>hecho saludable</em></h2>
+        <p class="lead">Todo lo bueno del langostino, con el respaldo nutricional que tu día necesita.</p>
+      </div>
+      <div class="grid-beneficios">
+        <div class="beneficio b1 reveal d1"><span class="ic">🐟</span><b>Omega 3·6·9</b><span>Grasas buenas en cada porción.</span></div>
+        <div class="beneficio b2 reveal d2"><span class="ic">🌾</span><b>100% Gluten Free</b><span>Libre de gluten, apto para celíacos.</span></div>
+        <div class="beneficio b3 reveal d3"><span class="ic">💪</span><b>18.3g Proteína</b><span>Por hamburguesa. Alta en proteína.</span></div>
+        <div class="beneficio b4 reveal d1"><span class="ic">🌿</span><b>Sin conservantes</b><span>Ingredientes limpios, nada artificial.</span></div>
+        <div class="beneficio b5 reveal d2"><span class="ic">🔥</span><b>Baja en grasa</b><span>Liviana, ideal para tu día a día.</span></div>
+        <div class="beneficio b6 reveal d3"><span class="ic">🦐</span><b>Langostino real</b><span>Sabor del mar en cada bocado.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ DÓNDE COMPRAR ============================ -->
+  <section id="comprar">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>✦</span></div>
+        <span class="eyebrow">Dónde comprar</span>
+        <h2 class="titulo-seccion">Llévalas a <em>tu mesa</em></h2>
+      </div>
+      <div class="grid-llegar">
+        <div class="datos-card reveal d1">
+          <div class="datos-fila"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg></span><div><strong>Tienda online</strong><span>Compra y recíbelas en casa · caja x4 a S/ 28</span></div></div>
+          <div class="datos-fila"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span><div><strong>Síguenos</strong><span>@ebifoods_peru — recetas e ideas</span></div></div>
+          <div style="margin-top:24px;">
+            <a class="btn btn-oro" style="width:100%;" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+              Comprar online
+            </a>
+          </div>
+        </div>
+        <div class="tienda-panel reveal d2">
+          <img src="assets/producto-alino.jpg" alt="Plato saludable con hamburguesas de langostino Ebi Foods" loading="lazy" />
+          <div class="info-tienda">
+            <small>Caja de 4 unidades · 480g</small>
+            <span class="precio">S/ 28.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer>
+    <div class="contenedor">
+      <img class="footer-crest" src="assets/logo.png" alt="Ebi Foods" />
+      <div class="logo-texto">Ebi <span class="acento">Foods</span></div>
+      <p class="frase-foot">"El antojo que te hace bien"</p>
+      <div class="redes">
+        <a href="https://www.instagram.com/ebifoods_peru/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.8c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07zm0 3.06a4.98 4.98 0 1 1 0 9.96 4.98 4.98 0 0 1 0-9.96zm0 8.21a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46zm6.34-8.41a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0z"/></svg></a>
+        <a href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener" aria-label="Tienda online"><svg viewBox="0 0 24 24"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg></a>
+      </div>
+      <div style="margin-bottom:8px;">Hamburguesas de langostinos · Encuéntranos en Tottus · @ebifoods_peru</div>
+      <div class="footer-bottom">© 2026 Ebi Foods Perú · Saludable, sin gluten y sin conservantes</div>
+    </div>
+  </footer>
+
+  <!-- BOTÓN COMPRAR FLOTANTE -->
+  <a class="wsp-flotante" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener" aria-label="Comprar online">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+    Comprar
+  </a>
+
+  <script>
+    /* ===== NAV: sólida al hacer scroll ===== */
+    (function () {
+      var nav = document.getElementById('nav');
+      function onScroll() { nav.classList.toggle('solid', window.scrollY > 40); }
+      onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    /* ===== MENÚ MÓVIL ===== */
+    (function () {
+      var ham = document.getElementById('hamburguesa');
+      var menu = document.getElementById('menuMovil');
+      var overlay = document.getElementById('overlay');
+      var cerrar = document.getElementById('cerrarMenu');
+      function abrir(v) {
+        menu.classList.toggle('abierto', v); overlay.classList.toggle('activo', v);
+        ham.classList.toggle('activo', v); ham.setAttribute('aria-expanded', v);
+        document.body.style.overflow = v ? 'hidden' : '';
+      }
+      ham.addEventListener('click', function () { abrir(!menu.classList.contains('abierto')); });
+      cerrar.addEventListener('click', function () { abrir(false); });
+      overlay.addEventListener('click', function () { abrir(false); });
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { abrir(false); }); });
+    })();
+
+    /* ===== Videos de productos: reproducir visibles, pausar el resto ===== */
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      var obs = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { var v = e.target; if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); } });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.card-video').forEach(function (v) { obs.observe(v); });
+    })();
+
+    /* ===== Reveal al hacer scroll ===== */
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var el = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) { el.forEach(function (e) { e.classList.add('visible'); }); return; }
+      var obs = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+      el.forEach(function (e) { obs.observe(e); });
+    })();
+
+    /* ===== Tilt 3D de tarjetas (solo desktop con cursor) ===== */
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(hover: none)').matches) return;
+      document.querySelectorAll('[data-tilt]').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+          card.style.transform = 'rotateX(' + ((.5 - py) * 16) + 'deg) rotateY(' + ((px - .5) * 16) + 'deg) translateZ(8px)';
+          card.style.setProperty('--mx', (px * 100) + '%'); card.style.setProperty('--my', (py * 100) + '%');
+        });
+        card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+      });
+    })();
+
+    /* ===== Paralaje del hero ===== */
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(hover: none)').matches) return;
+      var hero = document.getElementById('hero'), crest = document.getElementById('heroCrest');
+      var capas = hero.querySelectorAll('[data-paralaje]');
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        var cx = (e.clientX - r.left) / r.width - .5, cy = (e.clientY - r.top) / r.height - .5;
+        if (crest) crest.style.transform = 'rotateY(' + (cx * 14) + 'deg) rotateX(' + (-cy * 10) + 'deg)';
+        capas.forEach(function (c) { var f = parseFloat(c.dataset.paralaje) * 100; c.style.transform = 'translate(' + (cx * f) + 'px,' + (cy * f) + 'px)'; });
+      });
+      hero.addEventListener('mouseleave', function () { if (crest) crest.style.transform = ''; });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Catálogo · Ebi Foods — Hamburguesas de Langostinos</title>
+  <meta name="description" content="Catálogo de Ebi Foods — hamburguesas de langostinos saludables, sin gluten y sin conservantes. Compra online." />
+  <meta name="theme-color" content="#0e2113" />
+
+  <!-- Favicon e íconos con el logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+
+  <!-- Open Graph (vista previa al compartir) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Catálogo · Ebi Foods" />
+  <meta property="og:description" content="Hamburguesas de langostinos. Saludable, sin gluten y sin conservantes." />
+  <meta property="og:image" content="assets/producto-burger.jpg" />
+
+  <!-- ===== Fuentes: Archivo (títulos) + Manrope (cuerpo) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       VARIABLES — identidad Ebi Foods
+       ========================================================= */
+    :root {
+      --verde: #1d3d26; --verde-osc: #142b1a; --verde-prof: #0e2113;
+      --dorado: #d8a72c; --dorado-claro: #ecc758;
+      --naranja: #e0823c;
+      --crema: #efe7c8;
+      --radio: 16px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      background:
+        radial-gradient(75% 45% at 50% -8%, rgba(216,167,44,.18), transparent 60%),
+        radial-gradient(85% 55% at 100% 108%, rgba(224,130,60,.18), transparent 55%),
+        radial-gradient(85% 55% at 0% 112%, rgba(14,33,19,.5), transparent 55%),
+        linear-gradient(170deg, #21452a 0%, #163019 55%, #0e2113 100%);
+      background-attachment: fixed;
+      color: var(--crema); -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(86px + env(safe-area-inset-bottom));
+      overflow-x: hidden;
+    }
+    /* Fondo decorativo basado en el logo: emblema fantasma + grano vintage */
+    .bg-fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    .bg-fx::before { content: ""; position: absolute; inset: 0; background: url("assets/logo.png") no-repeat center 14%; background-size: min(520px, 90vw); opacity: .05; mix-blend-mode: screen; }
+    .bg-fx::after { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"); opacity: .22; mix-blend-mode: soft-light; }
+    h1, h2, h3 { font-family: 'Archivo', system-ui, sans-serif; letter-spacing: -.4px; }
+    a { text-decoration: none; color: inherit; }
+    .contenedor { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+    /* =========================================================
+       LOGO (marca reutilizable)
+       ========================================================= */
+    .logo { display: inline-flex; align-items: center; gap: 10px; }
+    .logo .logo-ico { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; border-radius: 9px; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
+    .logo .word { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.02rem; line-height: 1; letter-spacing: .3px; text-transform: uppercase; }
+    .logo .word b { color: var(--dorado); font-weight: 900; }
+
+    /* =========================================================
+       TOPBAR sticky
+       ========================================================= */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+      background: linear-gradient(to bottom, rgba(14,33,19,.97), rgba(14,33,19,.85));
+      backdrop-filter: blur(10px); border-bottom: 1px solid rgba(216,167,44,.2);
+    }
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+      border: 1px solid rgba(236,199,88,.45); color: var(--dorado-claro);
+      padding: 8px 14px; border-radius: 999px; transition: all .2s ease;
+    }
+    .btn-volver:hover { background: var(--dorado); color: var(--verde-prof); }
+
+    /* =========================================================
+       CABECERA DEL CATÁLOGO con logo
+       ========================================================= */
+    .carta-head { text-align: center; padding: 40px 16px 18px; }
+    .carta-head .crest { width: 110px; height: auto; margin: 0 auto 16px; display: block; object-fit: contain; border-radius: 22px; box-shadow: 0 12px 28px rgba(0,0,0,.5); animation: aparece .9s ease both; }
+    @keyframes aparece { from { opacity: 0; transform: translateY(14px) scale(.92); } to { opacity: 1; transform: none; } }
+    .carta-head h1 { font-size: clamp(2rem, 9vw, 2.9rem); font-weight: 900; text-transform: uppercase; }
+    .carta-head h1 em { font-style: normal; color: var(--dorado-claro); }
+    .carta-head p { color: rgba(239,231,200,.7); font-size: .82rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+
+    /* =========================================================
+       FILTRO DE CATEGORÍAS (chips sticky)
+       ========================================================= */
+    .filtros-wrap {
+      position: sticky; top: calc(57px + env(safe-area-inset-top)); z-index: 45;
+      background: linear-gradient(to bottom, rgba(14,33,19,.98), rgba(14,33,19,.92));
+      backdrop-filter: blur(8px); border-bottom: 1px solid rgba(216,167,44,.14);
+      margin-bottom: 22px;
+    }
+    .filtros { display: flex; gap: 9px; overflow-x: auto; padding: 13px 16px; max-width: 920px; margin: 0 auto; scrollbar-width: none; }
+    .filtros::-webkit-scrollbar { display: none; }
+    .chip {
+      flex: 0 0 auto; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .84rem; white-space: nowrap;
+      padding: 9px 16px; border-radius: 999px; color: var(--dorado-claro);
+      background: rgba(216,167,44,.08); border: 1px solid rgba(216,167,44,.35);
+      transition: all .25s ease;
+    }
+    .chip .ico { font-size: 1rem; }
+    .chip .n { font-size: .68rem; opacity: .7; font-weight: 700; }
+    .chip:hover { border-color: var(--dorado); }
+    .chip.activo { background: var(--dorado); color: var(--verde-prof); border-color: var(--dorado); }
+    .chip.activo .n { opacity: .75; }
+
+    .conteo { text-align: center; font-size: .78rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(239,231,200,.55); margin-bottom: 18px; }
+
+    /* =========================================================
+       GRID DE PRODUCTOS — 2 COLUMNAS
+       ========================================================= */
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding-bottom: 30px; }
+    @media (min-width: 760px) { .grid { gap: 22px; } }
+
+    .plato {
+      position: relative; border-radius: var(--radio); overflow: hidden;
+      background: #18331f; border: 1px solid rgba(216,167,44,.22);
+      box-shadow: 0 18px 40px -24px rgba(0,0,0,.8);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease, opacity .4s ease;
+      opacity: 0; transform: translateY(28px);
+    }
+    .plato.visible { opacity: 1; transform: translateY(0); }
+    .plato:hover { transform: translateY(-6px); box-shadow: 0 36px 70px -28px rgba(0,0,0,.9); border-color: rgba(216,167,44,.55); }
+    .plato.oculto { display: none; }
+
+    /* ---------- ZONA MULTIMEDIA (imagen + escena 3D fallback) ---------- */
+    .media { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
+    .plato-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: transform 7s ease; }
+    .plato:hover .plato-foto { transform: scale(1.07); }
+
+    /* ---------- ESCENA 3D CINEMATOGRÁFICA (fallback CSS) ---------- */
+    .escena {
+      position: absolute; inset: 0; z-index: 1; overflow: hidden; perspective: 800px;
+      background:
+        radial-gradient(85% 65% at 50% 22%, color-mix(in srgb, var(--tema) 72%, #1a3320), transparent 60%),
+        linear-gradient(170deg, color-mix(in srgb, var(--tema) 45%, #0e2113), #0b1a10 78%);
+    }
+    .escena::after { content: ""; position: absolute; top: -40%; left: -60%; width: 70%; height: 200%; transform: rotate(18deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.13), transparent); animation: barrido 7s ease-in-out infinite; }
+    @keyframes barrido { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+    .platillo3d { position: absolute; top: 42%; left: 50%; transform: translate(-50%,-50%); transform-style: preserve-3d; width: 150px; height: 150px; display: grid; place-items: center; }
+    .halo { position: absolute; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--tema) 85%, #fff), transparent 62%); filter: blur(7px); animation: respira 5s ease-in-out infinite; }
+    @keyframes respira { 0%,100% { opacity: .45; transform: scale(.9); } 50% { opacity: .9; transform: scale(1.12); } }
+    .anillo { position: absolute; width: 132px; height: 132px; border-radius: 50%; border: 2px solid rgba(236,199,88,.5); border-top-color: transparent; border-bottom-color: transparent; animation: girar 9s linear infinite; }
+    .anillo.b { width: 158px; height: 158px; border-color: rgba(236,199,88,.22); border-left-color: transparent; border-right-color: transparent; animation-duration: 14s; animation-direction: reverse; }
+    @keyframes girar { from { transform: rotateX(72deg) rotateZ(0); } to { transform: rotateX(72deg) rotateZ(360deg); } }
+    .plato-emoji { position: relative; z-index: 3; font-size: 4.4rem; line-height: 1; filter: drop-shadow(0 18px 22px rgba(0,0,0,.55)); transform: translateZ(40px); animation: flota 6s ease-in-out infinite; }
+    @keyframes flota { 0%,100% { transform: translateZ(40px) translateY(0) rotate3d(1,1,0,-8deg); } 50% { transform: translateZ(40px) translateY(-10px) rotate3d(1,1,0,8deg); } }
+
+    .scrim { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(to top, rgba(6,15,9,.92) 2%, rgba(6,15,9,.35) 28%, transparent 52%); }
+
+    .badge { position: absolute; top: 10px; left: 10px; z-index: 5; display: inline-flex; align-items: center; gap: 5px; font-size: .62rem; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--verde-prof); background: var(--dorado); padding: 5px 10px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+
+    .media .titulo { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 4; }
+    .media .cat { display: block; font-size: .6rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dorado-claro); margin-bottom: 4px; }
+    .media h3 { font-size: clamp(1.05rem, 4.2vw, 1.35rem); font-weight: 800; line-height: 1.1; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .media h3 em { font-style: normal; color: var(--dorado-claro); }
+
+    .info { padding: 13px 14px 15px; }
+    .info p { font-size: .82rem; font-weight: 300; color: rgba(239,231,200,.75); margin-bottom: 12px; min-height: 2.6em; }
+    .info .fila { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .precio { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--dorado-claro); }
+    .precio.idea { font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--dorado-claro); background: rgba(216,167,44,.16); padding: 6px 11px; border-radius: 999px; }
+    .pedir { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; background: var(--dorado); color: var(--verde-prof); padding: 9px 14px; border-radius: 999px; transition: background .2s ease, transform .2s ease; }
+    .pedir:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+    .pedir svg { width: 15px; height: 15px; fill: var(--verde-prof); }
+
+    /* =========================================================
+       BARRA FIJA INFERIOR — Comprar
+       ========================================================= */
+    .barra-reserva { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(0deg, #0e2113 72%, rgba(14,33,19,0)); }
+    .barra-reserva a { display: flex; align-items: center; gap: 13px; width: 100%; max-width: 460px; margin: 0 auto; color: var(--verde-prof); padding: 9px 22px 9px 9px; border-radius: 18px; background: linear-gradient(135deg, #ecc758 0%, #d8a72c 60%, #c79420 100%); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 16px 40px -12px rgba(216,167,44,.6), inset 0 1px 0 rgba(255,255,255,.4); transition: transform .25s ease, box-shadow .25s ease; }
+    .barra-reserva a:hover { transform: translateY(-2px); box-shadow: 0 24px 50px -14px rgba(216,167,44,.7), inset 0 1px 0 rgba(255,255,255,.4); }
+    .barra-reserva .ic { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background: rgba(14,33,19,.16); display: grid; place-items: center; }
+    .barra-reserva .ic svg { width: 24px; height: 24px; fill: var(--verde-prof); }
+    .barra-reserva .txt { display: flex; flex-direction: column; line-height: 1.12; text-align: left; }
+    .barra-reserva .txt small { font-size: .72rem; font-weight: 600; opacity: .8; letter-spacing: .2px; }
+    .barra-reserva .txt b { font-size: 1.05rem; font-weight: 800; letter-spacing: .2px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .plato { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo decorativo (emblema + grano), basado en el logo -->
+  <div class="bg-fx" aria-hidden="true"></div>
+
+  <!-- ============================ TOPBAR ============================ -->
+  <div class="topbar">
+    <a class="logo" href="index.html" aria-label="Ebi Foods">
+      <img class="logo-ico" src="assets/logo.png" alt="" />
+      <span class="word">Ebi <b>Foods</b></span>
+    </a>
+    <a class="btn-volver" href="index.html">← Inicio</a>
+  </div>
+
+  <!-- ============================ CABECERA ============================ -->
+  <div class="carta-head">
+    <!-- LOGO real de la marca -->
+    <img class="crest" src="assets/logo.png" alt="Ebi Foods" />
+
+    <h1>Nuestro <em>Catálogo</em></h1>
+    <p>Hamburguesas de langostinos · Ebi Foods</p>
+  </div>
+
+  <!-- ============================ FILTROS DE CATEGORÍA ============================ -->
+  <div class="filtros-wrap">
+    <div class="filtros" id="filtros" role="tablist" aria-label="Categorías"></div>
+  </div>
+  <div class="conteo" id="conteo"></div>
+
+  <!-- ============================ GRID 2 COLUMNAS ============================ -->
+  <main class="contenedor">
+    <div class="grid" id="grid" aria-label="Catálogo de productos"></div>
+  </main>
+
+  <!-- ============================ BARRA FIJA COMPRAR ============================ -->
+  <div class="barra-reserva">
+    <a href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg></span>
+      <span class="txt"><small>Tienda online · envío a casa</small><b>Comprar ahora</b></span>
+    </a>
+  </div>
+
+  <script>
+    /* =========================================================
+       CATEGORÍAS
+       -------------------------------------------------------
+       Edita o agrega categorías aquí; los chips de filtro se
+       generan solos a partir de los productos.
+       ========================================================= */
+    const CATEGORIAS = [
+      { id: 'producto', label: 'Producto',        ico: '🦐' },
+      { id: 'recetas',  label: 'Recetas e ideas', ico: '🍽️' },
+    ];
+
+    /* =========================================================
+       PRODUCTOS
+       -------------------------------------------------------
+       - img: foto del producto/receta (déjala vacía '' para usar
+         la escena 3D animada de respaldo).
+       - precio: si está vacío, se muestra la etiqueta "Idea con Ebi".
+       Para añadir videos 4K de Higgsfield más adelante, se puede
+       reemplazar <img> por <video> como en la plantilla original.
+       ========================================================= */
+    const PRODUCTOS = [
+      { cat: 'producto', tag: 'Producto · Estrella', nombre: 'Hamburguesa de <em>Langostinos</em>', emoji: '🍔',
+        desc: 'Caja de 4 unidades (480g). Alta en proteína, sin gluten y sin conservantes. Lista en minutos.',
+        precio: 'S/ 28', reco: true, tema: '#c08a2a', img: 'assets/producto-burger.jpg', video: 'videos/hamburguesa.mp4' },
+
+      { cat: 'recetas', tag: 'Receta · Saludable', nombre: 'Aliño <em>Proteico</em>', emoji: '🥗',
+        desc: 'Medallones dorados con salsa de la casa y ensalada de betarraga y granada. Liviano y completo.',
+        precio: '', reco: false, tema: '#d8a72c', img: 'assets/producto-alino.jpg', video: 'videos/alino.mp4' },
+
+      { cat: 'recetas', tag: 'Receta · Clásica', nombre: 'Clásica a la <em>Parrilla</em>', emoji: '🔥',
+        desc: 'Pan brioche, lechuga, tomate y cebolla morada con nuestra hamburguesa grillada.',
+        precio: '', reco: false, tema: '#e0823c', img: '', video: 'videos/parrilla.mp4' },
+    ];
+
+    const SHOP = 'https://hamburguesas-de-langostinos.myshopify.com';
+    const grid = document.getElementById('grid');
+
+    /* ===== Construcción de tarjetas ===== */
+    PRODUCTOS.forEach((p) => {
+      const art = document.createElement('article');
+      art.className = 'plato';
+      art.dataset.cat = p.cat;
+      art.style.setProperty('--tema', p.tema);
+      const nombrePlano = p.nombre.replace(/<[^>]+>/g, '');
+      // Capa multimedia: video si existe el .mp4 (con la foto como poster);
+      // si no, la foto; y si tampoco hay foto, queda la escena 3D animada de respaldo.
+      const overlay = p.video
+        ? `<video class="plato-foto" ${p.img ? `poster="${p.img}"` : ''} autoplay muted loop playsinline preload="metadata"><source src="${p.video}" type="video/mp4" /></video>`
+        : p.img
+        ? `<img class="plato-foto" src="${p.img}" alt="${nombrePlano}" loading="lazy" />`
+        : '';
+      const precioHTML = p.precio
+        ? `<span class="precio">${p.precio}</span>`
+        : `<span class="precio idea">Idea con Ebi</span>`;
+      art.innerHTML = `
+        <div class="media">
+          <div class="escena" aria-hidden="true"><div class="platillo3d"><span class="halo"></span><span class="anillo"></span><span class="anillo b"></span><span class="plato-emoji">${p.emoji}</span></div></div>
+          ${overlay}
+          <div class="scrim"></div>
+          ${p.reco ? '<span class="badge">⭐ Más vendida</span>' : ''}
+          <div class="titulo"><span class="cat">${p.tag}</span><h3>${p.nombre}</h3></div>
+        </div>
+        <div class="info">
+          <p>${p.desc}</p>
+          <div class="fila">
+            ${precioHTML}
+            <a class="pedir" target="_blank" rel="noopener" href="${SHOP}">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+              Comprar
+            </a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(art);
+    });
+
+    const tarjetas = Array.from(document.querySelectorAll('.plato'));
+
+    /* =========================================================
+       CHIPS DE FILTRO (Todos + categorías con productos)
+       ========================================================= */
+    const filtros = document.getElementById('filtros');
+    const conteo = document.getElementById('conteo');
+
+    function cuenta(catId) { return catId === 'todos' ? PRODUCTOS.length : PRODUCTOS.filter(p => p.cat === catId).length; }
+
+    const chips = [{ id: 'todos', label: 'Todos', ico: '✦' }]
+      .concat(CATEGORIAS.filter(c => cuenta(c.id) > 0));
+
+    chips.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (i === 0 ? ' activo' : '');
+      b.dataset.cat = c.id; b.setAttribute('role', 'tab');
+      b.innerHTML = `<span class="ico">${c.ico}</span> ${c.label} <span class="n">${cuenta(c.id)}</span>`;
+      filtros.appendChild(b);
+    });
+
+    function filtrar(catId) {
+      let visibles = 0;
+      tarjetas.forEach((t) => {
+        const ok = (catId === 'todos' || t.dataset.cat === catId);
+        t.classList.toggle('oculto', !ok);
+        if (ok) { visibles++; }
+      });
+      tarjetas.filter(t => !t.classList.contains('oculto')).forEach((t, k) => {
+        t.classList.remove('visible');
+        t.style.transitionDelay = (Math.min(k, 6) * 0.04) + 's';
+        requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('visible')));
+      });
+      const lbl = chips.find(c => c.id === catId).label;
+      conteo.textContent = `${visibles} ${visibles === 1 ? 'producto' : 'productos'} · ${lbl}`;
+    }
+
+    filtros.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      filtros.querySelectorAll('.chip').forEach(c => c.classList.remove('activo'));
+      chip.classList.add('activo');
+      filtrar(chip.dataset.cat);
+    });
+
+    /* =========================================================
+       VIDEOS: reproducir los visibles, pausar los que salen
+       (los .mp4 se detectan solos; mientras no existan se ve el poster/escena)
+       ========================================================= */
+    if ('IntersectionObserver' in window) {
+      const obsPlay = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+          const v = e.target.querySelector('video.plato-foto');
+          if (!v) return;
+          if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+        });
+      }, { threshold: 0.35 });
+      tarjetas.forEach((c) => obsPlay.observe(c));
+    }
+
+    /* =========================================================
+       ENTRADA INICIAL DE LAS TARJETAS
+       ========================================================= */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      tarjetas.forEach((c) => c.classList.add('visible'));
+    } else {
+      const obsRev = new IntersectionObserver((entradas) => {
+        entradas.forEach((e, i) => {
+          if (e.isIntersecting) {
+            e.target.style.transitionDelay = (Math.min(i, 1) * 0.06) + 's';
+            e.target.classList.add('visible');
+            obsRev.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      tarjetas.forEach((c) => obsRev.observe(c));
+    }
+
+    // Conteo inicial
+    conteo.textContent = `${PRODUCTOS.length} productos · Todos`;
+  </script>
+</body>
+</html>
