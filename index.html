@@ -205,6 +205,13 @@
     /* BENEFICIOS (galería) */
     .galeria { background: radial-gradient(75% 60% at 50% 100%, rgba(224,130,60,.10), transparent 60%), var(--crema-bg2); }
     #comprar { background: radial-gradient(70% 55% at 50% 0%, rgba(216,167,44,.12), transparent 60%); }
+    /* Video anuncio (spot) */
+    .spot { background: radial-gradient(80% 70% at 50% 0%, rgba(216,167,44,.16), transparent 60%), var(--verde-osc); }
+    .spot .titulo-seccion { color: var(--crema); } .spot .lead { color: rgba(239,231,200,.72); margin: 0 auto; } .spot .eyebrow { color: var(--dorado); }
+    .spot-marco { position: relative; width: min(370px, 84vw); aspect-ratio: 9 / 16; margin: 0 auto; border-radius: var(--radio); overflow: hidden; border: 3px solid var(--dorado); box-shadow: var(--sombra); background: #000; }
+    .spot-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .spot-sonido { position: absolute; bottom: 16px; right: 16px; z-index: 3; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(239,231,200,.35); background: rgba(8,20,12,.55); color: var(--crema); font-size: 1.15rem; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(5px); transition: transform .2s, background .2s; }
+    .spot-sonido:hover { transform: scale(1.08); background: rgba(8,20,12,.85); }
     .grid-beneficios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .beneficio { position: relative; border-radius: 16px; overflow: hidden; padding: 26px 22px; color: var(--crema); border: 1px solid rgba(216,167,44,.3); transition: transform .35s ease, box-shadow .35s ease; min-height: 158px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
     .beneficio:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
@@ -259,7 +266,7 @@
        RESPONSIVE
        ========================================================= */
     @media (min-width: 720px) {
-      .grid-platos { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; }
+      .grid-platos { grid-template-columns: repeat(auto-fit, minmax(0, 380px)); justify-content: center; }
       .grid-beneficios { grid-template-columns: repeat(3, 1fr); }
       .hero-grid { grid-template-columns: 1.05fr .95fr; text-align: left; padding: 24px 0 80px; }
       .hero-sello { align-self: flex-start; }
@@ -267,7 +274,7 @@
     }
     @media (min-width: 960px) {
       .grid-historia { grid-template-columns: 1fr 1fr; }
-      .grid-llegar { grid-template-columns: 1fr 1.15fr; }
+      .grid-llegar { grid-template-columns: minmax(0, 540px); justify-content: center; }
     }
     /* Ajustes móvil: menos padding, ocultar links desktop, mostrar hamburguesa */
     @media (max-width: 719px) {
@@ -352,6 +359,24 @@
   </header>
 
   <!-- ============================ PROPUESTA / MARCA ============================ -->
+  <!-- ============================ VIDEO ANUNCIO ============================ -->
+  <section class="spot" id="spot">
+    <div class="contenedor">
+      <div class="centro reveal">
+        <div class="ornamento"><span>🎬</span></div>
+        <span class="eyebrow">El comercial</span>
+        <h2 class="titulo-seccion">Del mar <em>a tu mesa</em></h2>
+        <p class="lead">Langostino real, dorado en la parrilla. Míralo en acción.</p>
+      </div>
+      <div class="spot-marco reveal d2">
+        <video id="spotVideo" class="spot-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="metadata">
+          <source src="videos/anuncio-ebi.mp4" type="video/mp4" />
+        </video>
+        <button class="spot-sonido" id="spotSonido" aria-label="Activar sonido" type="button">🔇</button>
+      </div>
+    </div>
+  </section>
+
   <section class="historia" id="historia">
     <div class="contenedor">
       <div class="grid-historia">
@@ -363,7 +388,7 @@
           <p class="firma">— Ebi Foods Perú</p>
         </div>
         <div class="historia-foto reveal d2">
-          <img src="assets/producto-burger.jpg" alt="Hamburguesa de langostinos Ebi Foods a la parrilla" loading="lazy" />
+          <img src="assets/producto-burger.jpg" alt="Caja de Hamburguesas de langostinos Ebi Foods — 480 g, 4 unidades" loading="lazy" />
           <div class="placa"><div class="grande">Langostino</div><div class="chico">Sabor premium · hecho saludable</div></div>
         </div>
       </div>
@@ -385,12 +410,6 @@
           <div class="tarjeta-3d" data-tilt><span class="glare"></span>
             <div class="escena"><video class="card-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="metadata"><source src="videos/hamburguesa.mp4" type="video/mp4" /></video></div>
             <div class="cuerpo"><h3>Hamburguesa de Langostinos</h3><p>Caja de 4 unidades (480g). Alta en proteína, sin gluten y sin conservantes. Lista en minutos.</p><div class="pie"><span class="precio-oro">S/ 28</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
-          </div>
-        </article>
-        <article class="card-plato reveal d2">
-          <div class="tarjeta-3d" data-tilt><span class="glare"></span>
-            <div class="escena"><video class="card-video" poster="assets/producto-alino.jpg" autoplay muted loop playsinline preload="metadata"><source src="videos/alino.mp4" type="video/mp4" /></video></div>
-            <div class="cuerpo"><h3>Aliño Proteico</h3><p>Medallones dorados con salsa de la casa y ensalada de betarraga y granada. Liviano y completo.</p><div class="pie"><span class="etiqueta-live">Idea fácil</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
           </div>
         </article>
       </div>
@@ -437,13 +456,6 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h-.5a1 1 0 0 0 0 2H7l.6 9.6A2 2 0 0 0 9.6 18h7.2a2 2 0 0 0 2-1.7l1.1-7.5a1 1 0 0 0-1-1.2H8.2L8 4.2A1 1 0 0 0 7 4zm2 16a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm8 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
               Comprar online
             </a>
-          </div>
-        </div>
-        <div class="tienda-panel reveal d2">
-          <img src="assets/producto-alino.jpg" alt="Plato saludable con hamburguesas de langostino Ebi Foods" loading="lazy" />
-          <div class="info-tienda">
-            <small>Caja de 4 unidades · 480g</small>
-            <span class="precio">S/ 28.00</span>
           </div>
         </div>
       </div>
@@ -540,6 +552,18 @@
         capas.forEach(function (c) { var f = parseFloat(c.dataset.paralaje) * 100; c.style.transform = 'translate(' + (cx * f) + 'px,' + (cy * f) + 'px)'; });
       });
       hero.addEventListener('mouseleave', function () { if (crest) crest.style.transform = ''; });
+    })();
+
+    /* Botón de sonido del video anuncio */
+    (function () {
+      var v = document.getElementById('spotVideo'), b = document.getElementById('spotSonido');
+      if (!v || !b) return;
+      b.addEventListener('click', function () {
+        v.muted = !v.muted;
+        if (!v.muted) { v.play().catch(function () {}); }
+        b.textContent = v.muted ? '🔇' : '🔊';
+        b.setAttribute('aria-label', v.muted ? 'Activar sonido' : 'Silenciar');
+      });
     })();
   </script>
 </body>
