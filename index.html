@@ -210,8 +210,6 @@
     .spot .titulo-seccion { color: var(--crema); } .spot .lead { color: rgba(239,231,200,.72); margin: 0 auto; } .spot .eyebrow { color: var(--dorado); }
     .spot-marco { position: relative; width: min(370px, 84vw); aspect-ratio: 9 / 16; margin: 0 auto; border-radius: var(--radio); overflow: hidden; border: 3px solid var(--dorado); box-shadow: var(--sombra); background: #000; }
     .spot-video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .spot-sonido { position: absolute; bottom: 16px; right: 16px; z-index: 3; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(239,231,200,.35); background: rgba(8,20,12,.55); color: var(--crema); font-size: 1.15rem; cursor: pointer; display: grid; place-items: center; backdrop-filter: blur(5px); transition: transform .2s, background .2s; }
-    .spot-sonido:hover { transform: scale(1.08); background: rgba(8,20,12,.85); }
     .grid-beneficios { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .beneficio { position: relative; border-radius: 16px; overflow: hidden; padding: 26px 22px; color: var(--crema); border: 1px solid rgba(216,167,44,.3); transition: transform .35s ease, box-shadow .35s ease; min-height: 158px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
     .beneficio:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
@@ -380,10 +378,9 @@
         <p class="lead">Langostino real, dorado en la parrilla. Míralo en acción.</p>
       </div>
       <div class="spot-marco reveal d2">
-        <video id="spotVideo" class="spot-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="metadata">
+        <video id="spotVideo" class="spot-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="auto">
           <source src="videos/anuncio-ebi.mp4" type="video/mp4" />
         </video>
-        <button class="spot-sonido" id="spotSonido" aria-label="Activar sonido" type="button">🔇</button>
       </div>
     </div>
   </section>
@@ -519,13 +516,27 @@
       menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { abrir(false); }); });
     })();
 
-    /* ===== Videos de productos: reproducir visibles, pausar el resto ===== */
+    /* ===== Videos: autoplay muteado, reproducir los visibles ===== */
     (function () {
+      var vids = document.querySelectorAll('video');
+      // Garantiza atributos de autoplay en móvil para TODOS los videos
+      vids.forEach(function (v) {
+        v.muted = true; v.defaultMuted = true; v.loop = true;
+        v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('autoplay', '');
+        v.removeAttribute('controls');
+        v.play().catch(function () {});
+      });
+      // Intenta arrancar todo tras el primer toque (por si el navegador bloquea el autoplay)
+      function arrancarTodo() { vids.forEach(function (v) { v.play().catch(function () {}); }); }
+      ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, arrancarTodo, { once: true, passive: true });
+      });
+      // Reproduce el video visible, pausa el resto (ahorra batería/datos)
       if (!('IntersectionObserver' in window)) return;
       var obs = new IntersectionObserver(function (en) {
         en.forEach(function (e) { var v = e.target; if (e.isIntersecting) { v.play().catch(function () {}); } else { v.pause(); } });
-      }, { threshold: 0.3 });
-      document.querySelectorAll('.card-video').forEach(function (v) { obs.observe(v); });
+      }, { threshold: 0.25 });
+      vids.forEach(function (v) { obs.observe(v); });
     })();
 
     /* ===== Reveal al hacer scroll ===== */
@@ -565,17 +576,6 @@
       hero.addEventListener('mouseleave', function () { if (crest) crest.style.transform = ''; });
     })();
 
-    /* Botón de sonido del video anuncio */
-    (function () {
-      var v = document.getElementById('spotVideo'), b = document.getElementById('spotSonido');
-      if (!v || !b) return;
-      b.addEventListener('click', function () {
-        v.muted = !v.muted;
-        if (!v.muted) { v.play().catch(function () {}); }
-        b.textContent = v.muted ? '🔇' : '🔊';
-        b.setAttribute('aria-label', v.muted ? 'Activar sonido' : 'Silenciar');
-      });
-    })();
   </script>
 </body>
 </html>
