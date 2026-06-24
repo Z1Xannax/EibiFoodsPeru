@@ -184,6 +184,9 @@
     .escena.t-caprese { background: radial-gradient(110% 80% at 50% 110%, rgba(0,0,0,.4), transparent 60%), linear-gradient(160deg, #2d5a2a, #8aab3a); }
     .escena .card-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; transition: transform 8s ease; }
     .tarjeta-3d:hover .card-foto { transform: scale(1.08); }
+    /* Foto que debe verse completa dentro del marco (sin recorte/zoom) */
+    .escena .card-foto.fit { object-fit: contain; padding: 6px; }
+    .tarjeta-3d:hover .card-foto.fit { transform: none; }
     /* Video del plato: cuando exista el .mp4 cubre la escena; si no, se ve el poster/gradiente */
     .escena .card-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; }
     .escena::before { content: ""; position: absolute; inset: 0; z-index: 6; background: radial-gradient(circle at 50% 42%, rgba(255,210,140,.4), transparent 55%); animation: brilla 5s ease-in-out infinite; mix-blend-mode: screen; pointer-events: none; }
@@ -416,7 +419,7 @@
       <div class="grid-platos">
         <article class="card-plato reveal d1">
           <div class="tarjeta-3d" data-tilt><span class="glare"></span>
-            <div class="escena"><video class="card-video" poster="assets/producto-burger.jpg" autoplay muted loop playsinline preload="metadata"><source src="videos/hamburguesa.mp4" type="video/mp4" /></video></div>
+            <div class="escena"><img class="card-foto fit" src="assets/producto-burger.jpg" alt="Caja de Hamburguesas de Langostinos Ebi Foods — 480 g, 4 unidades" /></div>
             <div class="cuerpo"><h3>Hamburguesa de Langostinos</h3><p>Caja de 4 unidades (480g). Alta en proteína, sin gluten y sin conservantes. Lista en minutos.</p><div class="pie"><span class="precio-oro">S/ 28</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
           </div>
         </article>
