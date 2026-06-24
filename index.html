@@ -180,13 +180,10 @@
     .tarjeta-3d:hover { box-shadow: 0 40px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(216,167,44,.5); }
     .tarjeta-3d .glare { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(circle at var(--mx,50%) var(--my,30%), rgba(255,255,255,.18), transparent 45%); }
     .tarjeta-3d:hover .glare { opacity: 1; }
-    .escena { position: relative; aspect-ratio: 9 / 16; max-height: 70vh; overflow: hidden; transform: translateZ(40px); background: radial-gradient(120% 80% at 50% 0%, rgba(216,167,44,.12), transparent 60%), linear-gradient(160deg, #1f4128 0%, #16301d 55%, #0e2113 100%); display: grid; place-items: center; }
+    .escena { position: relative; aspect-ratio: 4 / 5; max-height: 70vh; overflow: hidden; transform: translateZ(40px); background: radial-gradient(120% 80% at 50% 0%, rgba(216,167,44,.12), transparent 60%), linear-gradient(160deg, #1f4128 0%, #16301d 55%, #0e2113 100%); display: grid; place-items: center; }
     .escena.t-caprese { background: radial-gradient(110% 80% at 50% 110%, rgba(0,0,0,.4), transparent 60%), linear-gradient(160deg, #2d5a2a, #8aab3a); }
     .escena .card-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; transition: transform 8s ease; }
     .tarjeta-3d:hover .card-foto { transform: scale(1.08); }
-    /* Foto que debe verse completa dentro del marco (sin recorte/zoom) */
-    .escena .card-foto.fit { object-fit: contain; padding: 6px; }
-    .tarjeta-3d:hover .card-foto.fit { transform: none; }
     /* Video del plato: cuando exista el .mp4 cubre la escena; si no, se ve el poster/gradiente */
     .escena .card-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; }
     .escena::before { content: ""; position: absolute; inset: 0; z-index: 6; background: radial-gradient(circle at 50% 42%, rgba(255,210,140,.4), transparent 55%); animation: brilla 5s ease-in-out infinite; mix-blend-mode: screen; pointer-events: none; }
@@ -295,8 +292,8 @@
       .hero-cta { width: 100%; justify-content: center; }
       .hero-cta .btn { flex: 0 1 auto; max-width: 100%; padding: 14px 18px; font-size: .9rem; }
       .hero-stats { gap: 14px 26px; }
-      /* Tarjeta destacada: marco de la foto más compacto en móvil (misma proporción) */
-      .platos .escena { max-width: 240px; margin-left: auto; margin-right: auto; max-height: none; }
+      /* Tarjeta destacada: la foto 4:5 llena el marco a lo ancho en móvil */
+      .platos .escena { max-height: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -421,7 +418,7 @@
       <div class="grid-platos">
         <article class="card-plato reveal d1">
           <div class="tarjeta-3d" data-tilt><span class="glare"></span>
-            <div class="escena"><img class="card-foto fit" src="assets/producto-burger.jpg" alt="Caja de Hamburguesas de Langostinos Ebi Foods — 480 g, 4 unidades" /></div>
+            <div class="escena"><img class="card-foto" src="assets/producto-burger-4x5.jpg" alt="Hamburguesas de Langostinos Ebi Foods a la parrilla — 480 g, 4 unidades" /></div>
             <div class="cuerpo"><h3>Hamburguesa de Langostinos</h3><p>Caja de 4 unidades (480g). Alta en proteína, sin gluten y sin conservantes. Lista en minutos.</p><div class="pie"><span class="precio-oro">S/ 28</span><a class="mini-comprar" href="https://hamburguesas-de-langostinos.myshopify.com" target="_blank" rel="noopener">Comprar →</a></div></div>
           </div>
         </article>
